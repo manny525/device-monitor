@@ -9,7 +9,8 @@ import getStatus from '../../apiCalls/getStatus';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import MonitorTable from '../MonitorTable';
-
+import { CSVLink } from "react-csv";
+import moment from 'moment';
 
 export default function Home(props) {
   const [numOfDevices, setNumOfDevices] = useState(0);
@@ -26,12 +27,19 @@ export default function Home(props) {
     const body = JSON.stringify(devices);
     setTimer(timer + 1);
     const newData = await getStatus(body);
-    const data = Object.values(newData).map(val => val);
-    let row = [Date.now(), ...data];
+    const data = { Timestamp: moment(Date.now()).format() };
+    const finalData = Object.assign(data, newData);
+    console.log(finalData);
     let newTable = table;
-    newTable.push(row);
+    newTable.push(finalData);
     setTable([...newTable]);
   }
+
+  const csvReport = {
+    data: table,
+    headers: header,
+    filename: 'Device_Monitor.csv'
+  };
 
   useEffect(() => {
     if (start) {
@@ -91,6 +99,7 @@ export default function Home(props) {
       {
         <MonitorTable header={header} table={table} timer={timer} />
       }
+      <CSVLink {...csvReport}>Export to CSV</CSVLink>
     </div>
   )
 }

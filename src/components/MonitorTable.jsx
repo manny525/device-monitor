@@ -12,12 +12,13 @@ export default function MonitorTable(props) {
             let totalOn = new Array(props.header.length - 1).fill(0);
             let totalOff = new Array(props.header.length - 1).fill(0);
             props.table.forEach(row => {
-                row.forEach((ele, index) => {
-                    if (index > 0) {
+                let nrow = Object.values(row)
+                nrow.forEach((ele, index) => {
+                    if (index < nrow.length-1) {
                         if (ele === "online")
-                            totalOn[index - 1]++;
+                            totalOn[index]++;
                         if (ele === "offline")
-                            totalOff[index - 1]++;
+                            totalOff[index]++;
                     }
                 })
             })
@@ -44,8 +45,13 @@ export default function MonitorTable(props) {
                         <tbody>
                             {
                                 props.table.length>0 && props.table.map(row => {
-                                    return <tr>{row.map((ele, index) => {
-                                        return <td key={index}>{ele}</td>
+                                    let nrow = Object.values(row)
+                                    return <tr>{
+                                        nrow.map((ele, index) => {
+                                        if (index == 0)
+                                            return <td key={index}>{nrow[nrow.length-1]}</td>
+                                        else
+                                            return <td key={index}>{nrow[index-1]}</td>
                                     })
                                     }
                                     </tr>
