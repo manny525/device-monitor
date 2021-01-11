@@ -1,0 +1,187 @@
+// --------------------
+// Definition of variables
+$primary: #32c3ff;
+
+// ----------------------------------------
+// To install Boostrap:
+// 1) Run in the client folder: $ npm i bootstrap
+// 2) Import bootstrap with the following line
+// @import '../node_modules/bootstrap/scss/bootstrap.scss';
+//
+// To install Reactstrap:
+// 1) Run in the client folder: $ npm i reactstrap
+// 2) Go to the official documentation and take some examples: https://reactstrap.github.io/
+// import { Button } from 'reactstrap';
+// <Button color="danger">Danger!</Button>
+// ----------------------------------------
+
+// --------------------
+// Style reusable for all components
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.info {
+  margin: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: #5776e9;
+  color: white;
+}
+
+.info.info-danger {
+  background-color: #e73f3f;
+}
+
+// --------------------
+// Style for App component
+.login-form {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 1%;
+  border-style: groove; 
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.clickable {
+  cursor: pointer
+}
+
+.img {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+}
+
+.comment-box {
+  margin-right: 5%;
+  border-style: groove;
+  border-radius: 15px;
+  background-color: whitesmoke;
+  margin-left: 2%;
+  padding-left: 2%;
+  margin-bottom: 1%; 
+}
+
+.notification-box {
+  width: 30%;
+  height: 200px;
+  border-style: groove;
+  border-radius: 15px;
+  background-color: whitesmoke;
+  text-align: center;
+}
+
+.notification-box-line {
+  border-style: solid;
+  border-color: darkgray;
+  border-width: 0.5px;
+  margin-bottom: 2%;
+}
+
+.Queue-box {
+  align-content: space-between;
+  margin-right: 5%;
+  margin-top: 5%;
+  padding-left: 0;
+  border-style: groove;
+  border-radius: 15px;
+  background-color: whitesmoke;
+}
+
+.Queue-line {
+  border-style: solid;
+  border-color: darkgray;
+  border-width: 0.5px;
+  margin-bottom: 5px;
+}
+
+.Course-box {
+  background-color: white;
+  padding-top: 1%;
+  width: 20%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+  border-style: groove;
+  border-radius: 15px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.material-box {
+  padding-left: 0.5%;
+  margin-right: 5%;
+  margin-top: 2%;
+  // border-style: groove;
+  border-radius: 15px;
+  background-color: whitesmoke;
+}
+.App {
+  text-align: center;
+
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+  }
+
+  .App-header {
+    background-color: $primary;
+    padding: 20px;
+    color: white;
+    flex-direction: column;
+    align-content: space-between;
+    a {
+      color: white;
+      padding: 0 5px;
+      text-decoration: unset;
+    }
+
+    a.active {
+      font-weight: bold;
+    }
+  }
+
+  .App-title {
+    font-size: 1.5em;
+  }
+
+  .App-intro {
+    font-size: large;
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+// --------------------
+// Style for Home component
+.Home {
+  p {
+    font-size: 1.2em;
+  }
+}
+
+// --------------------
+// Style for Secret component
+.Secret {
+  .result {
+    font-size: 1.2em;
+    color: $primary;
+  }
+}
