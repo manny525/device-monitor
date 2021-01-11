@@ -20,12 +20,15 @@ export default function Home(props) {
   const [table, setTable] = useState([]);
   const [timer, setTimer] = useState(0);
   const [start, setStart] = useState(false);
+  const [limit] = useState(4);
 
   const getData = async () => {
-    setStart(true);
     const devices = { 'devices': deviceIDs };
     const body = JSON.stringify(devices);
-    setTimer(timer + 1);
+    if (timer == limit)
+     setTimer(1);
+    else
+      setTimer(timer + 1);
     const newData = await getStatus(body);
     const data = { Timestamp: moment(Date.now()).format() };
     const finalData = Object.assign(data, newData);
@@ -43,7 +46,6 @@ export default function Home(props) {
 
   useEffect(() => {
     if (start) {
-      if (timer < 15)
         var interval = setInterval(async () => {
           await getData();
         }, 2000);
@@ -54,7 +56,6 @@ export default function Home(props) {
   return (
     <div className="container" style={{ overflowY: 'hidden' }}>
       <h1>Moniter Devices</h1>
-      <h2>Devices</h2>
       <InputGroup className="mb-3">
         <InputGroup.Prepend>
           <InputGroup.Text id="basic-addon1">Number of Devices</InputGroup.Text>
@@ -71,6 +72,7 @@ export default function Home(props) {
         />
         <Button className="Primary" onClick={() => setNumOfDevices(cacheNumOfDevices)}>Set</Button>
       </InputGroup>
+      <h2>Devices</h2>
       {
         Array(numOfDevices).fill(1).map((e, index) =>
           <InputGroup className="mb-3" key={index}>
@@ -94,10 +96,13 @@ export default function Home(props) {
         )
       }
       {
-        numOfDevices > 0 && <Button className="Primary" onClick={() => getData()}>Start</Button>
+        numOfDevices > 0 && <Button className="Primary" onClick={() =>{ setStart(true); getData()}}>Start</Button>
       }
       {
-        <MonitorTable header={header} table={table} timer={timer} />
+        start && <Button style={{ marginLeft: '3px' }} className="Primary" onClick={() => setStart(false)}>Stop</Button>
+      }
+      {
+        <MonitorTable limit={limit} header={header} table={table} timer={timer} /> //set limit = 150 for 5 minutes
       }
       <CSVLink {...csvReport}>Export to CSV</CSVLink>
     </div>
